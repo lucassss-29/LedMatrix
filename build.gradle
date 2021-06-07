@@ -18,6 +18,8 @@ allprojects {
     repositories {
         google()
         jcenter()
+        // image picker
+        maven { url "https://jitpack.io" }
     }
 }
 
