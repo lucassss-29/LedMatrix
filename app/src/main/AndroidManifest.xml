@@ -19,7 +19,7 @@
         android:theme="@style/Theme.LedMatrix">
         <activity android:name=".ScanDevicesActivity"></activity>
         <activity android:name="com.example.advertise.AdvertiseActivity"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

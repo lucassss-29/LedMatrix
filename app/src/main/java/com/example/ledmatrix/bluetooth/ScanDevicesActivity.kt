@@ -1,4 +1,4 @@
-package com.example.ledmatrix
+package com.example.ledmatrix.bluetooth
 
 import android.Manifest
 import android.bluetooth.BluetoothAdapter
@@ -14,6 +14,8 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.example.ledmatrix.R
+import com.example.ledmatrix.bluetooth.DeviceListAdapter
 import com.example.ledmatrix.databinding.ActivityScanDevicesBinding
 
 
