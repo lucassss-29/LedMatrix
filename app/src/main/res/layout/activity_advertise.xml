@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/green_header"
-        tools:context=".home.MainActivity">
+        tools:context=".ui.home.MainActivity">
 
         <ImageView
             android:id="@+id/iv_image"

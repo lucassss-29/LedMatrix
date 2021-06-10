@@ -1,4 +1,4 @@
-package com.example.ledmatrix.bluetooth
+package com.example.ledmatrix.ui.bluetooth
 
 //import android.R
 import android.bluetooth.BluetoothDevice

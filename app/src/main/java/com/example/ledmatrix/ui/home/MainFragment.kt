@@ -1,4 +1,4 @@
-package com.example.ledmatrix.home
+package com.example.ledmatrix.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater

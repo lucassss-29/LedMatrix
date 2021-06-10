@@ -1,4 +1,4 @@
-package com.example.ledmatrix.home
+package com.example.ledmatrix.ui.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
