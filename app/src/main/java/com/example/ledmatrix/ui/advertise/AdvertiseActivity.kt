@@ -19,6 +19,7 @@ import androidx.core.graphics.scale
 import androidx.databinding.DataBindingUtil
 import com.example.ledmatrix.R
 import com.example.ledmatrix.databinding.ActivityAdvertiseBinding
+import com.example.ledmatrix.utils.toast
 import com.github.dhaval2404.imagepicker.ImagePicker
 
 private lateinit var binding: ActivityAdvertiseBinding
@@ -129,7 +130,7 @@ class AdvertiseActivity : AppCompatActivity() {
                     pickImageFromGallary()
                 } else {
                     // permission from popup denied
-                    Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
+                    toast("Permission denied")
                 }
             }
         }
@@ -148,13 +149,13 @@ class AdvertiseActivity : AppCompatActivity() {
             binding.btnPush.animation = animation
             binding.btnPush.setOnClickListener {
                 val result = ConvertImageToHex(uri)
-                Toast.makeText(this, "Push done!", Toast.LENGTH_SHORT).show()
+                toast("Push done!")
             }
             PreviewImage(uri)
         } else if (resultCode == ImagePicker.RESULT_ERROR){
             Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
         } else {
-            Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show()
+            toast("Cancelled")
         }
     }
 
