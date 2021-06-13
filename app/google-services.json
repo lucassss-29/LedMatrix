@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "481510971026",
+    "project_id": "ledmatrix-69d1b",
+    "storage_bucket": "ledmatrix-69d1b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:481510971026:android:5e865999860d087f6bb84b",
+        "android_client_info": {
+          "package_name": "com.example.ledmatrix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "481510971026-e2lr5vn560tiab5aa26gnas1k57uk0mu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ledmatrix",
+            "certificate_hash": "07c9b8d814c6c64bae6009152e0e88431007e229"
+          }
+        },
+        {
+          "client_id": "481510971026-hoei0scf8uqgd24ot4egrns1dr5nqsrq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOKWj7Omm8cqscs_jha5o_KiGTK61Ux_k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "481510971026-hoei0scf8uqgd24ot4egrns1dr5nqsrq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

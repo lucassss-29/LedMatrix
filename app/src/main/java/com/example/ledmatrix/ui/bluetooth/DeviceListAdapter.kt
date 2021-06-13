@@ -1,4 +1,4 @@
-package com.example.ledmatrix
+package com.example.ledmatrix.ui.bluetooth
 
 //import android.R
 import android.bluetooth.BluetoothDevice
@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import com.example.ledmatrix.R
 import java.util.*
 
 class DeviceListAdapter(context: Context, tvResourceId: Int, devices: ArrayList<BluetoothDevice>) :

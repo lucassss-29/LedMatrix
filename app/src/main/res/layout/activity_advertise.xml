@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/green_header"
+        tools:context=".ui.home.MainActivity">
+
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_width="380dp"
+            android:layout_height="131dp"
+            android:layout_marginTop="44dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/ic_image" />
+
+        <Button
+            android:id="@+id/btn_choose"
+            android:layout_width="390dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/sofia_pro_medium"
+            android:text="Choose"
+            app:backgroundTint="#29BF7F"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.413"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_image" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="42dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_arrow_back"
+            app:tint="#08610C"
+            tools:ignore="VectorDrawableCompat" />
+
+        <Button
+            android:id="@+id/btn_preview"
+            android:layout_width="180dp"
+            android:layout_height="54dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/sofia_pro_medium"
+            android:text="preview"
+            android:textColor="#C92B2C29"
+            app:backgroundTint="#5483D163"
+            app:icon="@drawable/ic_info"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_choose" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardView_info"
+            android:layout_width="388dp"
+            android:layout_height="213dp"
+            android:layout_marginTop="16dp"
+            app:strokeWidth="3dp"
+            app:strokeColor="@color/black"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_push">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="225dp">
+
+                <TextView
+                    android:id="@+id/tv_img_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="32dp"
+                    android:fontFamily="@font/sofia_pro_medium"
+                    android:text="Image Name: "
+                    android:textColor="#0E6812"
+                    android:visibility="visible"
+                    app:layout_constraintStart_toEndOf="@+id/iv_preview"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_img_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/sofia_pro_medium"
+                    android:text="Location: "
+                    android:textColor="#0E6812"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_img_format"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/tv_img_format"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_img_format" />
+
+                <TextView
+                    android:id="@+id/tv_img_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/sofia_pro_medium"
+                    android:text="Size: "
+                    android:textColor="#0E6812"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_img_name"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/tv_img_name"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_img_name" />
+
+                <TextView
+                    android:id="@+id/tv_info_size"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:capitalize="words"
+                    android:fontFamily="@font/sofia_pro_medium"
+                    android:text="TextView"
+                    android:textAllCaps="true"
+                    android:textColor="#F37852"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/tv_img_size"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_info_name" />
+
+                <TextView
+                    android:id="@+id/tv_info_location"
+                    android:layout_width="0dp"
+                    android:layout_height="62dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="12dp"
+                    android:fontFamily="@font/sofia_pro_medium"
+                    android:text="TextView"
+                    android:textAlignment="inherit"
+                    android:textAllCaps="false"
+                    android:textColor="#F37852"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/tv_img_location"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_info_format" />
+
+                <TextView
+                    android:id="@+id/tv_info_name"
+                    android:layout_width="147dp"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="12dp"
+                    android:fontFamily="@font/sofia_pro_medium"
+                    android:text="TextView"
+                    android:textColor="#F37852"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/tv_img_name"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_img_format"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/sofia_pro_medium"
+                    android:text="Format: "
+                    android:textColor="#0E6812"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_img_size"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/tv_img_size"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_img_size" />
+
+                <TextView
+                    android:id="@+id/tv_info_format"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/sofia_pro_medium"
+                    android:text="Format: "
+                    android:textColor="#F37852"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/tv_img_format"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_info_size" />
+
+                <TextView
+                    android:id="@+id/tv_img_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/sofia_pro_regular"
+                    android:text="64 x 64"
+                    android:textColor="#0E6812"
+                    app:layout_constraintEnd_toEndOf="@+id/iv_preview"
+                    app:layout_constraintStart_toStartOf="@+id/iv_preview"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_preview" />
+
+                <ImageView
+                    android:id="@+id/iv_preview"
+                    android:layout_width="100dp"
+                    android:layout_height="102dp"
+                    android:layout_marginStart="24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.26"
+                    app:srcCompat="@drawable/ic_launcher_background" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <Button
+            android:id="@+id/btn_push"
+            android:layout_width="182dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/sofia_pro_medium"
+            android:text="Push"
+            android:textColor="#00796B"
+            app:backgroundTint="#FFFFFF"
+            app:icon="@drawable/ic_download"
+            app:iconTint="#388E3C"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_choose" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
