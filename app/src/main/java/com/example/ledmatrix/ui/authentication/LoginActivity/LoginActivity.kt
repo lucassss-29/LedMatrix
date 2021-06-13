@@ -34,13 +34,20 @@ class LoginActivity : AppCompatActivity() {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success")
                             val user = auth.currentUser
-                            Toast.makeText(baseContext, "Authentication success.",
-                                Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                baseContext,
+                                "Login success.",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.exception)
-                            Toast.makeText(baseContext, "Authentication failed.",
-                                Toast.LENGTH_SHORT).show()
+
+                            Toast.makeText(
+                                baseContext,
+                                "Login failed." + task.exception?.message.toString(),
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
             }
