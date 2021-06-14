@@ -21,6 +21,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        // Cannot fit requested classes in a single dex file Error fix
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -96,4 +98,10 @@ dependencies {
 
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
+    
+    // authen implementation
+    implementation 'com.google.firebase:firebase-auth-ktx'
+
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
 }
