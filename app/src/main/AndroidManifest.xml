@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.ledmatrix">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -17,9 +18,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LedMatrix">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
         <activity android:name=".ScanDevicesActivity"></activity>
         <activity android:name="com.example.advertise.AdvertiseActivity"></activity>
-        <activity android:name="com.example.ledmatrix.ui.home.MainActivity">
+        <activity android:name=".PaintMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

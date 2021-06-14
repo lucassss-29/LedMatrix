@@ -21,9 +21,9 @@
             <ImageButton
                 android:id="@+id/btn_undo"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/ic_undo"
+                android:src="@drawable/ic__erase"
                 android:text="Undo" />
 
             <ImageButton
@@ -64,10 +64,11 @@
         </LinearLayout>
     </LinearLayout>
 
-    <com.example.ledmatrix.DrawView
+    <com.example.ledmatrix.ui.painting.DrawView
         android:id="@+id/draw_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/linear"
         android:layout_centerInParent="true" />
+
 </RelativeLayout>
