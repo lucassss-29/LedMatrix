@@ -20,18 +20,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LedMatrix">
-
-        <activity android:name=".ui.authentication.Register.RegisterActivity"/>
-        <!--<activity android:name=".ui.authentication.LoginActivity.LoginActivity" /> -->
+        <activity android:name=".ui.authentication.Register.RegisterActivity" />
+        <!-- <activity android:name=".ui.authentication.LoginActivity.LoginActivity" /> -->
         <!-- activity android:name=".ScanDevicesActivity" / -->
         <activity android:name="com.example.advertise.AdvertiseActivity" />
-        <activity android:name=".ui.authentication.LoginActivity.LoginActivity">
-        <!--<activity android:name=".ui.home.MainActivity">-->
-
-       <activity android:name=".ui.authentication.LoginActivityDemo"></activity>
+        <activity android:name=".ui.profile.ProfileActivity"/>
+<!--        <activity android:name=".ui.authentication.LoginActivity.LoginActivity" />-->
+         <activity android:name=".ui.home.MainActivity"/>
         <!-- <activity android:name=".ui.profile.ProfileActivity"></activity> -->
-        <activity android:name="com.example.advertise.AdvertiseActivity" />
-        <activity android:name=".ui.authentication.LoginActivityDemo">
+        <activity android:name=".ui.authentication.LoginActivity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

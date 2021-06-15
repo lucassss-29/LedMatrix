@@ -18,11 +18,12 @@ class RegisterActivity : AppCompatActivity() {
         private val TAG = RegisterActivity::class.java.simpleName
     }
     lateinit var binding : ActivityRegisterBinding
-    private lateinit var auth: FirebaseAuth
+    private var auth: FirebaseAuth = Firebase.auth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_register)
-        auth = Firebase.auth
+//        auth = Firebase.auth
         binding.btnRegisterRegisterPage.setOnClickListener {
             val email = binding.etEmailRegisterPage.text.toString().trim()
             val password = binding.etPasswordRegisterPage.text.toString().trim()
@@ -68,5 +69,17 @@ class RegisterActivity : AppCompatActivity() {
             val i = Intent(this, LoginActivity::class.java)
             startActivity(i)
         }
+    }
+
+    fun getFullName(): String{
+        val email = auth.currentUser?.email.toString()
+        val fullName = email.split("@")
+        val name = fullName[0].capitalize()
+
+        return name
+    }
+
+    fun getEmail(): String{
+        return auth.currentUser?.email.toString()
     }
 }
