@@ -11,6 +11,7 @@ import androidx.fragment.app.commit
 import com.example.ledmatrix.R
 import com.example.ledmatrix.databinding.ActivityMainBinding
 import com.example.ledmatrix.ui.profile.ProfileActivity
+import com.example.ledmatrix.utils.toast
 import com.google.android.gms.common.util.DataUtils
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
@@ -63,7 +64,9 @@ class MainActivity : AppCompatActivity() {
                 Picasso.get().load(uri).into(home_profile_image)
             }
 
-        })
+        }).addOnFailureListener {
+            toast("Optional: Go to profile to setup infomation")
+        }
     }
 
     companion object{

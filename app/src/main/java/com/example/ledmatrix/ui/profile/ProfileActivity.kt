@@ -90,6 +90,7 @@ class ProfileActivity : AppCompatActivity() {
                     override fun onSuccess(uri: Uri?) {
                         Picasso.get().load(uri).into(iv_profile_avatar)
                         home_profile_image.setImageURI(uri)
+                        toast("Automatically refresh page")
                     }
 
                 })
