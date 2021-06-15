@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="toast_style">
+        <item name="colorBackground">#006400</item>
+        <item name="iconLeft">@drawable/ic_toast_correct</item>
+    </style>
+
+    <style name="itoast_style">
+        <item name="colorBackground">@color/Red</item>
+        <item name="iconLeft">@drawable/ic_itoast</item>
+    </style>
+</resources>

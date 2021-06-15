@@ -2,6 +2,8 @@ package com.example.advertise
 
 import android.animation.ObjectAnimator
 import android.app.Activity
+import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -13,42 +15,46 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.view.Window
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.core.graphics.scale
 import androidx.databinding.DataBindingUtil
 import com.example.ledmatrix.R
 import com.example.ledmatrix.databinding.ActivityAdvertiseBinding
+import com.example.ledmatrix.utils.iToast
 import com.example.ledmatrix.utils.toast
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.android.gms.tasks.OnSuccessListener
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.UploadTask
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_profile.*
+import kotlinx.android.synthetic.main.dialog_advertise_history.*
 
 private lateinit var binding: ActivityAdvertiseBinding
+private lateinit var storageReference: StorageReference
+private lateinit var auth: FirebaseAuth
+private var numberOfPic: Int? = null // generate file name
 
 class AdvertiseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_advertise)
         binding.ivImage.setImageResource(R.drawable.ic_image)
+        storageReference = FirebaseStorage.getInstance().getReference()
+        auth = Firebase.auth
+
+
         SetInformationHide(true)
         SetPreViewButtonHide(true)
         SetPushButtonHide(true)
         supportActionBar?.hide()
-        //btn choose img clicked
-//        binding.btnChooseImg.setOnClickListener {
-//            //check run time permission
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-//                if (checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
-//                    // permission denied
-//                    val permissions = arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
-//                    requestPermissions(permissions, PERMISSION_CODE)
-//                } else {
-//                    // permission already granted
-//                    pickImageFromGallary()
-//                }
-//            } else {
-//                // system OS is lower Marshallow
-//            }
-//        }
         binding.btnChoose.setOnClickListener {
             ImagePicker.with(this)
                 .crop()	    			                //Crop image(Optional), Check Customization for more option
@@ -56,6 +62,26 @@ class AdvertiseActivity : AppCompatActivity() {
                 .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
                 .start()
         }
+
+        binding.btnAdvertiseHistory.setOnClickListener {
+            openHistoryDialog()
+        }
+
+    }
+
+    private fun openHistoryDialog() {
+        val view = View.inflate(this, R.layout.dialog_advertise_history, null)
+        val builder = AlertDialog.Builder(this)
+        builder.setView(view)
+
+        val dialog = builder.create()
+        dialog.show()
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        Log.e("openHistoryDialog", "numberOfPic = " + numberOfPic)
+        updateToDialog(numberOfPic!!)
+//        btn_advertise_dialog_ok.setOnClickListener {
+//            dialog.dismiss()
+//        }
 
     }
 
@@ -103,8 +129,10 @@ class AdvertiseActivity : AppCompatActivity() {
     private fun SetPushButtonHide(status: Boolean){
         if (status == true){
             binding.btnPush.setVisibility(View.INVISIBLE)
+            binding.btnAdvertiseHistory.setVisibility(View.INVISIBLE)
         } else {
             binding.btnPush.setVisibility(View.VISIBLE)
+            binding.btnAdvertiseHistory.setVisibility(View.VISIBLE)
         }
     }
 
@@ -130,7 +158,7 @@ class AdvertiseActivity : AppCompatActivity() {
                     pickImageFromGallary()
                 } else {
                     // permission from popup denied
-                    toast("Permission denied")
+                    iToast("Permission denied")
                 }
             }
         }
@@ -150,13 +178,61 @@ class AdvertiseActivity : AppCompatActivity() {
             binding.btnPush.setOnClickListener {
                 val result = ConvertImageToHex(uri)
                 toast("Push done!")
+
+                // generate the file name randomly to store to the Firebase, avoiding duplicate name
+                val rnds = (0..100000).random()
+                numberOfPic = rnds
+
+                Log.e("onActivityResult", "numberOfPic = " + numberOfPic)
+                uploadtoFirebase(uri, numberOfPic!!)
             }
             PreviewImage(uri)
         } else if (resultCode == ImagePicker.RESULT_ERROR){
             Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
         } else {
-            toast("Cancelled")
+            iToast("Cancelled")
         }
+    }
+
+    private fun uploadtoFirebase(imageUri: Uri, numberOfPic: Int) {
+        val fileRef: StorageReference = storageReference.child("advertising/" + auth.currentUser?.uid + "/" + numberOfPic.toString() + ".jpg")
+        Log.e("uploadToFireBase", "numberOfPic = " + numberOfPic)
+        fileRef.putFile(imageUri).addOnSuccessListener(object :
+            OnSuccessListener<UploadTask.TaskSnapshot> {
+            override fun onSuccess(p0: UploadTask.TaskSnapshot?) {
+                toast("Image uploaded.")
+//                updateToDialog(numberOfPic)
+            }
+        }).addOnFailureListener{
+            iToast("Failed to upload the image to FireBase.")
+        }
+    }
+
+    private fun updateToDialog(NOP: Int) {
+        val imageViewNumber = (1..4).random()
+        val profileRef: StorageReference = storageReference.child("advertising/" + auth.currentUser?.uid + "/" + NOP.toString() + ".jpg")
+        Log.e("updateToDialog", "NOP = " + NOP)
+        profileRef.downloadUrl.addOnSuccessListener(object: OnSuccessListener<Uri>{
+            override fun onSuccess(uri: Uri?) {
+                iv_advertise_dialog_1.setImageURI(uri)
+//                Picasso.get().load(uri).into(iv_profile_avatar)
+//                when(imageViewNumber){
+//                    1->{
+//                        Picasso.get().load(uri).into(iv_advertise_dialog_1) // check uri not null
+//                    }
+//                    2->{
+//                        Picasso.get().load(uri!!).into(iv_advertise_dialog_2)
+//                    }
+//                    3->{
+//                        Picasso.get().load(uri!!).into(iv_advertise_dialog_3)
+//                    }
+//                }
+            }
+
+        }).addOnFailureListener {
+            iToast("fail to update to dialog")
+        }
+
     }
 
     fun ConvertImageToHex(uri: Uri): ByteArray{

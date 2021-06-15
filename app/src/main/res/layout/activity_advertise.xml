@@ -26,8 +26,9 @@
         <Button
             android:id="@+id/btn_choose"
             android:layout_width="390dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="4dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/button_bg"
             android:fontFamily="@font/sofia_pro_medium"
             android:text="Choose"
             app:backgroundTint="#29BF7F"
@@ -52,9 +53,10 @@
         <Button
             android:id="@+id/btn_preview"
             android:layout_width="180dp"
-            android:layout_height="54dp"
+            android:layout_height="45dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="16dp"
+            android:background="@drawable/button_bg"
             android:fontFamily="@font/sofia_pro_medium"
             android:text="preview"
             android:textColor="#C92B2C29"
@@ -65,26 +67,26 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardView_info"
-            android:layout_width="388dp"
-            android:layout_height="213dp"
+            android:layout_width="386dp"
+            android:layout_height="181dp"
             android:layout_marginTop="16dp"
-            app:strokeWidth="3dp"
-            app:strokeColor="@color/black"
             app:cardCornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_push">
+            app:layout_constraintTop_toBottomOf="@+id/btn_advertise_history"
+            app:strokeColor="@color/black"
+            app:strokeWidth="3dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="225dp">
+                android:layout_height="180dp">
 
                 <TextView
                     android:id="@+id/tv_img_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="20dp"
                     android:fontFamily="@font/sofia_pro_medium"
                     android:text="Image Name: "
                     android:textColor="#0E6812"
@@ -154,7 +156,7 @@
                     android:id="@+id/tv_info_name"
                     android:layout_width="147dp"
                     android:layout_height="18dp"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginEnd="12dp"
                     android:fontFamily="@font/sofia_pro_medium"
                     android:text="TextView"
@@ -207,11 +209,11 @@
                     android:id="@+id/iv_preview"
                     android:layout_width="100dp"
                     android:layout_height="102dp"
-                    android:layout_marginStart="24dp"
+                    android:layout_marginStart="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.26"
+                    app:layout_constraintVertical_bias="0.162"
                     app:srcCompat="@drawable/ic_launcher_background" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -220,9 +222,10 @@
         <Button
             android:id="@+id/btn_push"
             android:layout_width="182dp"
-            android:layout_height="54dp"
+            android:layout_height="45dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:background="@drawable/button_bg"
             android:fontFamily="@font/sofia_pro_medium"
             android:text="Push"
             android:textColor="#00796B"
@@ -231,6 +234,20 @@
             app:iconTint="#388E3C"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_choose" />
+
+        <Button
+            android:id="@+id/btn_advertise_history"
+            android:layout_width="390dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/button_bg"
+            android:text="View History"
+            android:fontFamily="@font/sofia_pro_medium"
+            app:icon="@drawable/ic_advertise_history"
+            app:iconGravity="textStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_preview" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
