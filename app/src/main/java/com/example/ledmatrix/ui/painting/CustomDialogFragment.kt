@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.fragment.app.DialogFragment
 import com.example.ledmatrix.R
-import com.example.ledmatrix.paint
+import kotlinx.android.synthetic.main.activity_paint.*
 import kotlinx.android.synthetic.main.color_fragment.view.*
 
 class CustomDialogFragment: DialogFragment() {
@@ -33,11 +33,11 @@ class CustomDialogFragment: DialogFragment() {
         val black = rootView.findViewById<RadioButton>(R.id.blackbtn)
         val grey = rootView.findViewById<RadioButton>(R.id.greybtn)
         rootView.submitbtn.setOnClickListener{
-            if (red.isChecked){ paint.setColor(-0x10000) }
-            else if (blue.isChecked){  paint.setColor(-0xffff01) }
-            else if (green.isChecked){ paint.setColor(-0xff0100) }
-            else if (black.isChecked){ paint.setColor(-0x1000000) }
-            else if (grey.isChecked){ paint.setColor(-0x777778) }
+            if (red.isChecked){ draw_view_paint.setColor(-0x10000) }
+            else if (blue.isChecked){  draw_view_paint.setColor(-0xffff01) }
+            else if (green.isChecked){ draw_view_paint.setColor(-0xff0100) }
+            else if (black.isChecked){ draw_view_paint.setColor(-0x1000000) }
+            else if (grey.isChecked){ draw_view_paint.setColor(-0x777778) }
             
             communicator.passData(rootView.toString())
 
