@@ -7,36 +7,49 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.example.ledmatrix.R
 import java.util.*
 
-class DeviceListAdapter(context: Context, tvResourceId: Int, devices: ArrayList<BluetoothDevice>) :
-    ArrayAdapter<BluetoothDevice?>(context, tvResourceId, devices as List<BluetoothDevice?>) {
-    private val mLayoutInflater: LayoutInflater
-    private val mDevices: ArrayList<BluetoothDevice>
-    private val mViewResourceId: Int
+class DeviceListAdapter : RecyclerView.Adapter<DeviceListAdapter.ViewHolder>()  {
 
-    init {
-        mDevices = devices
-        mLayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        mViewResourceId = tvResourceId
+    private lateinit var view: View
+    var nListener: DeviceAdapterListener ?= null
+    interface DeviceAdapterListener{
+        fun nOnClickbtnPair(device : BluetoothDevice)
+    }
+    var nData: List<BluetoothDevice> = listOf()
+        set(value){
+            field = value
+            notifyDataSetChanged()
+        }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceListAdapter.ViewHolder {
+        var layoutInflater = LayoutInflater.from(parent.context)
+        view = layoutInflater.inflate(R.layout.device_adapter_view, parent, false)
+        return ViewHolder(view)
     }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-//        var convertView = convertView
-        var convertView = mLayoutInflater.inflate(mViewResourceId, null)
-        val device = mDevices[position]
-        if (device != null) {
-            val deviceName = convertView.findViewById<TextView>(R.id.tv_device_name)
-            val deviceAdress = convertView.findViewById<TextView>(R.id.tv_device_address)
-            if (deviceName != null) {
-                deviceName.text = device.name
-            }
-            if (deviceAdress != null) {
-                deviceAdress.text = device.address
-            }
+    override fun onBindViewHolder(holder: DeviceListAdapter.ViewHolder, position: Int) {
+        if(nData[position].name == null){
+            holder.blNameDevice.text = "Unknown"
+        }else {
+            holder.blNameDevice.text = nData[position].name
         }
-        return convertView
+        holder.blAdressDevice.text = nData[position].address
+        holder.blBtnPair.setOnClickListener {
+            nListener?.nOnClickbtnPair(nData[position])
+        }
+    }
+
+    override fun getItemCount(): Int {
+        return nData.size
+    }
+    class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
+        val blNameDevice = itemView.findViewById<TextView>(R.id.Bl_Name_Device)
+        val blAdressDevice = itemView.findViewById<TextView>(R.id.Bl_Address_Device)
+        val blBtnPair = itemView.findViewById<Button>(R.id.btn_Pair)
     }
 }

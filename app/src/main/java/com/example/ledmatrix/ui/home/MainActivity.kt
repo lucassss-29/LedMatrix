@@ -8,8 +8,12 @@ import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import com.example.ledmatrix.R
 import com.example.ledmatrix.databinding.ActivityMainBinding
+import com.example.ledmatrix.ui.bluetooth.ScanDevicesFragment
+import com.example.ledmatrix.ui.bluetooth.ScanDevicesFragment.Companion.m_bluetoothSocket
+import com.example.ledmatrix.ui.bluetooth.ScanDevicesFragment.Companion.m_isConnected
 import com.example.ledmatrix.ui.profile.ProfileActivity
 import com.example.ledmatrix.utils.toast
 import com.google.android.gms.common.util.DataUtils
@@ -22,6 +26,7 @@ import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_profile.*
+import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
 
@@ -43,7 +48,16 @@ class MainActivity : AppCompatActivity() {
 //            setReorderingAllowed(true)
 //            add<MainFragment>(R.id.frag_container)
 //        }
-
+        binding.btnScanning.setOnClickListener {
+            supportFragmentManager.commit {
+                setReorderingAllowed(true)
+                replace<ScanDevicesFragment>(R.id.fragment)
+                addToBackStack(null)
+            }
+        }
+        binding.btnDisconnect.setOnClickListener{
+            disconnect()
+        }
         binding.homeProfileImage.setOnClickListener {
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
@@ -72,6 +86,18 @@ class MainActivity : AppCompatActivity() {
     companion object{
         val TAG = "Main Activity"
     }
-
+    private fun disconnect(){
+        if(m_bluetoothSocket != null){
+            try{
+                m_bluetoothSocket!!.close()
+                toast("Disconnected")
+                m_bluetoothSocket = null
+                m_isConnected = false
+            }catch (e: IOException){
+                e.printStackTrace()
+            }
+        }
+      //  finish()
+    }
 
 }

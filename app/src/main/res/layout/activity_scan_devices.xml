@@ -7,73 +7,56 @@
 
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
         android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        tools:context=".ScanDevicesActivity">
+        android:background="@drawable/green_background">
 
-        <TextView
-            android:id="@+id/tv_bluetooth_status"
+        <Button
+            android:id="@+id/btn_refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="156dp"
+            android:layout_marginEnd="156dp"
+            android:layout_marginBottom="61dp"
+            android:background="@drawable/circle_button"
+            android:text="Refresh"
+            app:backgroundTint="@color/purple_700"
+            app:cornerRadius="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textAlignment="center"
-            android:textColor="#000"
-            android:textSize="20sp"
-            android:padding="5dp"
-            android:gravity="center_horizontal" />
+            android:layout_height="202dp"
+            android:isScrollContainer="false"
+            android:scrollbarSize="10dp"
+            android:scrollbarStyle="insideOverlay"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/imv_bluetooth"
-            android:layout_width="133dp"
-            android:layout_height="100dp"
-            android:src="@drawable/ic_bluetooth_off" />
+        <pl.bclogic.pulsator4droid.library.PulsatorLayout
+            android:id="@+id/pulsator"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/recyclerView"
+            app:pulse_color="@color/colorBL"
+            app:pulse_count="5"
+            app:pulse_duration="7000"
+            app:pulse_interpolator="AccelerateDecelerate"
+            app:pulse_repeat="0"
+            app:pulse_startFromScratch="true">
 
-        <Button
-            android:id="@+id/btn_turn_on_off"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="200dp"
-            android:onClick="btn_turn_on_off"
-            android:text=" Turn on/off" />
+        </pl.bclogic.pulsator4droid.library.PulsatorLayout>
 
-        <Button
-            android:id="@+id/btn_discover"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:text="Enable Discoverable"
-            android:onClick="btnEnableDisable_Discoverable"
-            android:minWidth="200dp" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Discover"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:onClick="btnDiscover"
-            android:minWidth="200dp"/>
-
-        <Button
-            android:id="@+id/btn_pair"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:text="Get Paired Devices"
-            android:minWidth="200dp" />
-
-        <TextView
-            android:id="@+id/tv_pair"
-            android:padding="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#000" />
-
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:id="@+id/lv_new_device"/>
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
