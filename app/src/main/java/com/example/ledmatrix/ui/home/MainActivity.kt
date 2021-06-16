@@ -28,6 +28,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_profile.*
 import java.io.IOException
 
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
