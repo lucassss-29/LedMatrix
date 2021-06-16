@@ -93,6 +93,7 @@ class AdvertiseActivity : AppCompatActivity() {
 
     private fun SetInformationHide(status: Boolean){
         if (status == true) {
+            binding.cardViewInfo.setVisibility(View.INVISIBLE)
             binding.tvImgName.setVisibility(View.INVISIBLE)
             binding.tvImgSize.setVisibility(View.INVISIBLE)
             binding.tvImgFormat.setVisibility(View.INVISIBLE)
@@ -104,6 +105,7 @@ class AdvertiseActivity : AppCompatActivity() {
             binding.tvInfoLocation.setVisibility(View.INVISIBLE)
             binding.ivPreview.setVisibility(View.INVISIBLE)
         } else {
+            binding.cardViewInfo.setVisibility(View.VISIBLE)
             binding.tvImgName.setVisibility(View.VISIBLE)
             binding.tvImgSize.setVisibility(View.VISIBLE)
             binding.tvImgFormat.setVisibility(View.VISIBLE)

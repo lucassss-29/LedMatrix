@@ -17,6 +17,7 @@ class SignupTabFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.signup_tab_fragment, container, false)
+        Log.e(TAG, "view")
         return view
     }
 

@@ -20,26 +20,27 @@ class LoginTabFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.login_tab_fragment, container, false)
-
-        val loginEmail: EditText = view.findViewById(R.id.login_email)
-        val loginPass: EditText = view.findViewById(R.id.login_pass)
-        val loginForget: TextView = view.findViewById(R.id.login_forget_pass)
-        val loginBtn: Button = view.findViewById(R.id.login_btn)
-
-
-        loginEmail.translationX = 800F
-        loginPass.translationX = 800F
-        loginForget.translationX = 800F
-        loginBtn.translationX = 800F
-
-        loginEmail.animate().translationX(0F).alpha(1F).setDuration(800).setStartDelay(300)
-            .start()
-        loginPass.animate().translationX(0F).alpha(1F).setDuration(800).setStartDelay(500)
-            .start()
-        loginForget.animate().translationX(0F).alpha(1F).setDuration(800).setStartDelay(500)
-            .start()
-        loginBtn.animate().translationX(0F).alpha(1F).setDuration(800).setStartDelay(700)
-            .start()
         return view
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+//        setupTransforming()
+    }
+
+//    private fun setupTransforming() {
+//        loginEmail.translationX = 800F
+//        loginPass.translationX = 800F
+//        loginForget.translationX = 800F
+//        loginBtn.translationX = 800F
+//
+//        loginEmail.animate().translationX(0F).alpha(1F).setDuration(800).setStartDelay(300)
+//            .start()
+//        loginPass.animate().translationX(0F).alpha(1F).setDuration(800).setStartDelay(500)
+//            .start()
+//        loginForget.animate().translationX(0F).alpha(1F).setDuration(800).setStartDelay(500)
+//            .start()
+//        loginBtn.animate().translationX(0F).alpha(1F).setDuration(800).setStartDelay(700)
+//            .start()
+//    }
 }
