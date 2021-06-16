@@ -20,6 +20,7 @@ import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_home.*
 import androidx.fragment.app.replace
+import com.example.advertise.AdvertiseFragment
 import com.example.ledmatrix.ui.profile.ProfileFragment
 import com.example.ledmatrix.utils.Utils.toast
 
@@ -58,6 +59,22 @@ class HomeFragment : Fragment() {
                 addToBackStack(null)
             }
         }
+
+        iv_home_advertise.setOnClickListener {
+            parentFragmentManager.commit {
+                setReorderingAllowed(true)
+                setCustomAnimations(
+                    R.anim.slide_in,
+                    R.anim.fade_out,
+                    R.anim.fade_in,
+                    R.anim.slide_out
+                )
+                replace<AdvertiseFragment>(R.id.fragment_commutor)
+                addToBackStack(null)
+            }
+        }
+
+
     }
 
 //    override fun onCreate(savedInstanceState: Bundle?) {

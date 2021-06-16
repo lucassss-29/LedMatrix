@@ -14,7 +14,7 @@
         tools:context=".ui.home.HomeFragment">
 
         <ImageView
-            android:id="@+id/iv_image"
+            android:id="@+id/iv_ad_image"
             android:layout_width="380dp"
             android:layout_height="131dp"
             android:layout_marginTop="44dp"
@@ -24,7 +24,7 @@
             tools:srcCompat="@drawable/ic_image" />
 
         <Button
-            android:id="@+id/btn_choose"
+            android:id="@+id/btn_ad_choose"
             android:layout_width="390dp"
             android:layout_height="40dp"
             android:layout_marginTop="16dp"
@@ -35,23 +35,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.413"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_image" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="42dp"
-            android:layout_height="38dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_arrow_back"
-            app:tint="#08610C"
-            tools:ignore="VectorDrawableCompat" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_ad_image" />
 
         <Button
-            android:id="@+id/btn_preview"
+            android:id="@+id/btn_ad_preview"
             android:layout_width="180dp"
             android:layout_height="45dp"
             android:layout_marginStart="12dp"
@@ -63,7 +50,7 @@
             app:backgroundTint="#5483D163"
             app:icon="@drawable/ic_info"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_choose" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_ad_choose" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardView_info"
@@ -91,7 +78,7 @@
                     android:text="Image Name: "
                     android:textColor="#0E6812"
                     android:visibility="visible"
-                    app:layout_constraintStart_toEndOf="@+id/iv_preview"
+                    app:layout_constraintStart_toEndOf="@+id/iv_ad_preview"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -201,12 +188,12 @@
                     android:fontFamily="@font/sofia_pro_regular"
                     android:text="64 x 64"
                     android:textColor="#0E6812"
-                    app:layout_constraintEnd_toEndOf="@+id/iv_preview"
-                    app:layout_constraintStart_toStartOf="@+id/iv_preview"
-                    app:layout_constraintTop_toBottomOf="@+id/iv_preview" />
+                    app:layout_constraintEnd_toEndOf="@+id/iv_ad_preview"
+                    app:layout_constraintStart_toStartOf="@+id/iv_ad_preview"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_ad_preview" />
 
                 <ImageView
-                    android:id="@+id/iv_preview"
+                    android:id="@+id/iv_ad_preview"
                     android:layout_width="100dp"
                     android:layout_height="102dp"
                     android:layout_marginStart="16dp"
@@ -220,7 +207,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <Button
-            android:id="@+id/btn_push"
+            android:id="@+id/btn_ad_push"
             android:layout_width="182dp"
             android:layout_height="45dp"
             android:layout_marginTop="16dp"
@@ -233,7 +220,7 @@
             app:icon="@drawable/ic_download"
             app:iconTint="#388E3C"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_choose" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_ad_choose" />
 
         <Button
             android:id="@+id/btn_advertise_history"
@@ -247,7 +234,23 @@
             app:iconGravity="textStart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_preview" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_ad_preview" />
+
+        <Button
+            android:id="@+id/btn_ad_back"
+            android:layout_width="112dp"
+            android:layout_height="53dp"
+            android:background="#00FFFFFF"
+            android:fontFamily="@font/sofia_pro_medium"
+            android:text="Home"
+            android:textAllCaps="false"
+            android:textColor="#124728"
+            android:textSize="18sp"
+            app:icon="@drawable/ic_arrow_back"
+            app:iconPadding="0dp"
+            app:iconTint="#124728"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

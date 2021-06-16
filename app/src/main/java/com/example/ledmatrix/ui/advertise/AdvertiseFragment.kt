@@ -11,10 +11,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import com.example.ledmatrix.R
 import com.example.ledmatrix.databinding.ActivityAdvertiseBinding
 import com.example.ledmatrix.utils.Utils
@@ -26,6 +29,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
+import kotlinx.android.synthetic.main.activity_advertise.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.dialog_advertise_history.*
@@ -35,11 +39,22 @@ private lateinit var storageReference: StorageReference
 private lateinit var auth: FirebaseAuth
 private var numberOfPic: Int? = null // generate file name
 
-class AdvertiseActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_advertise)
-        binding.ivImage.setImageResource(R.drawable.ic_image)
+class AdvertiseFragment : Fragment() {
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.activity_advertise, container, false)
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+//        binding = DataBindingUtil.setContentView(this, R.layout.activity_advertise)
+        iv_ad_image.setImageResource(R.drawable.ic_image)
         storageReference = FirebaseStorage.getInstance().getReference()
         auth = Firebase.auth
 
@@ -47,8 +62,7 @@ class AdvertiseActivity : AppCompatActivity() {
         SetInformationHide(true)
         SetPreViewButtonHide(true)
         SetPushButtonHide(true)
-        supportActionBar?.hide()
-        binding.btnChoose.setOnClickListener {
+        btn_ad_choose.setOnClickListener {
             ImagePicker.with(this)
                 .crop()	    			                //Crop image(Optional), Check Customization for more option
                 .compress(1024)			        //Final image size will be less than 1 MB(Optional)
@@ -56,27 +70,27 @@ class AdvertiseActivity : AppCompatActivity() {
                 .start()
         }
 
-        binding.btnAdvertiseHistory.setOnClickListener {
-            openHistoryDialog()
-        }
-
-    }
-
-    private fun openHistoryDialog() {
-        val view = View.inflate(this, R.layout.dialog_advertise_history, null)
-        val builder = AlertDialog.Builder(this)
-        builder.setView(view)
-
-        val dialog = builder.create()
-        dialog.show()
-        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-        Log.e("openHistoryDialog", "numberOfPic = " + numberOfPic)
-        updateToDialog(numberOfPic!!)
-//        btn_advertise_dialog_ok.setOnClickListener {
-//            dialog.dismiss()
+//        btn_advertise_history.setOnClickListener {
+//            openHistoryDialog()
 //        }
 
     }
+
+//    private fun openHistoryDialog() {
+//        val view = View.inflate(this, R.layout.dialog_advertise_history, null)
+//        val builder = AlertDialog.Builder(this)
+//        builder.setView(view)
+//
+//        val dialog = builder.create()
+//        dialog.show()
+//        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+//        Log.e("openHistoryDialog", "numberOfPic = " + numberOfPic)
+//        updateToDialog(numberOfPic!!)
+//        btn_advertise_dialog_ok.setOnClickListener {
+//            dialog.dismiss()
+//        }
+//
+//    }
 
     private fun pickImageFromGallary() {
         val intent = Intent(Intent.ACTION_PICK)
@@ -86,48 +100,48 @@ class AdvertiseActivity : AppCompatActivity() {
 
     private fun SetInformationHide(status: Boolean){
         if (status == true) {
-            binding.cardViewInfo.setVisibility(View.INVISIBLE)
-            binding.tvImgName.setVisibility(View.INVISIBLE)
-            binding.tvImgSize.setVisibility(View.INVISIBLE)
-            binding.tvImgFormat.setVisibility(View.INVISIBLE)
-            binding.tvImgLocation.setVisibility(View.INVISIBLE)
-            binding.tvImgTitle.setVisibility(View.INVISIBLE)
-            binding.tvInfoName.setVisibility(View.INVISIBLE)
-            binding.tvInfoSize.setVisibility(View.INVISIBLE)
-            binding.tvInfoFormat.setVisibility(View.INVISIBLE)
-            binding.tvInfoLocation.setVisibility(View.INVISIBLE)
-            binding.ivPreview.setVisibility(View.INVISIBLE)
+            cardView_info.setVisibility(View.INVISIBLE)
+//            binding.tvImgName.setVisibility(View.INVISIBLE)
+//            binding.tvImgSize.setVisibility(View.INVISIBLE)
+//            binding.tvImgFormat.setVisibility(View.INVISIBLE)
+//            binding.tvImgLocation.setVisibility(View.INVISIBLE)
+//            binding.tvImgTitle.setVisibility(View.INVISIBLE)
+//            binding.tvInfoName.setVisibility(View.INVISIBLE)
+//            binding.tvInfoSize.setVisibility(View.INVISIBLE)
+//            binding.tvInfoFormat.setVisibility(View.INVISIBLE)
+//            binding.tvInfoLocation.setVisibility(View.INVISIBLE)
+//            binding.ivPreview.setVisibility(View.INVISIBLE)
         } else {
-            binding.cardViewInfo.setVisibility(View.VISIBLE)
-            binding.tvImgName.setVisibility(View.VISIBLE)
-            binding.tvImgSize.setVisibility(View.VISIBLE)
-            binding.tvImgFormat.setVisibility(View.VISIBLE)
-            binding.tvImgLocation.setVisibility(View.VISIBLE)
-            binding.tvImgTitle.setVisibility(View.VISIBLE)
-            binding.tvInfoName.setVisibility(View.VISIBLE)
-            binding.tvInfoSize.setVisibility(View.VISIBLE)
-            binding.tvInfoFormat.setVisibility(View.VISIBLE)
-            binding.tvInfoLocation.setVisibility(View.VISIBLE)
-            binding.ivPreview.setVisibility(View.VISIBLE)
+            cardView_info.setVisibility(View.VISIBLE)
+//            binding.tvImgName.setVisibility(View.VISIBLE)
+//            binding.tvImgSize.setVisibility(View.VISIBLE)
+//            binding.tvImgFormat.setVisibility(View.VISIBLE)
+//            binding.tvImgLocation.setVisibility(View.VISIBLE)
+//            binding.tvImgTitle.setVisibility(View.VISIBLE)
+//            binding.tvInfoName.setVisibility(View.VISIBLE)
+//            binding.tvInfoSize.setVisibility(View.VISIBLE)
+//            binding.tvInfoFormat.setVisibility(View.VISIBLE)
+//            binding.tvInfoLocation.setVisibility(View.VISIBLE)
+//            binding.ivPreview.setVisibility(View.VISIBLE)
         }
 
     }
 
     private fun SetPreViewButtonHide(status: Boolean){
         if (status == true){
-            binding.btnPreview.setVisibility(View.INVISIBLE)
+            btn_ad_preview.setVisibility(View.INVISIBLE)
         } else {
-            binding.btnPreview.setVisibility(View.VISIBLE)
+            btn_ad_preview.setVisibility(View.VISIBLE)
         }
     }
 
     private fun SetPushButtonHide(status: Boolean){
         if (status == true){
-            binding.btnPush.setVisibility(View.INVISIBLE)
-            binding.btnAdvertiseHistory.setVisibility(View.INVISIBLE)
+            btn_ad_push.setVisibility(View.INVISIBLE)
+            btn_advertise_history.setVisibility(View.INVISIBLE)
         } else {
-            binding.btnPush.setVisibility(View.VISIBLE)
-            binding.btnAdvertiseHistory.setVisibility(View.VISIBLE)
+            btn_ad_push.setVisibility(View.VISIBLE)
+            btn_advertise_history.setVisibility(View.VISIBLE)
         }
     }
 
@@ -153,7 +167,7 @@ class AdvertiseActivity : AppCompatActivity() {
                     pickImageFromGallary()
                 } else {
                     // permission from popup denied
-                    Utils.iToast("Permission denied", this)
+                    Utils.iToast("Permission denied", requireActivity())
                 }
             }
         }
@@ -164,15 +178,15 @@ class AdvertiseActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK ) { // && requestCode == IMAGE_PICK_CODE
             val uri: Uri = data?.data!!
-            binding.ivImage.setImageURI(uri)
+            iv_ad_image.setImageURI(uri)
             ConvertImageToHex(uri)
             SetPreViewButtonHide(false)
             SetPushButtonHide(false)
-            val animation = AnimationUtils.loadAnimation(this, R.anim.shake)
-            binding.btnPush.animation = animation
-            binding.btnPush.setOnClickListener {
+            val animation = AnimationUtils.loadAnimation(requireActivity(), R.anim.shake)
+            btn_ad_push.animation = animation
+            btn_ad_push.setOnClickListener {
                 val result = ConvertImageToHex(uri)
-                Utils.toast("Push done!", this)
+                Utils.toast("Push done!", requireActivity())
 
                 // generate the file name randomly to store to the Firebase, avoiding duplicate name
                 val rnds = (0..100000).random()
@@ -183,9 +197,10 @@ class AdvertiseActivity : AppCompatActivity() {
             }
             PreviewImage(uri)
         } else if (resultCode == ImagePicker.RESULT_ERROR){
-            Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+            Utils.toast(ImagePicker.getError(data), requireActivity())
         } else {
-            Utils.iToast("Cancelled",this)
+            Utils.iToast("Cancelled",requireActivity())
         }
     }
 
@@ -195,11 +210,11 @@ class AdvertiseActivity : AppCompatActivity() {
         fileRef.putFile(imageUri).addOnSuccessListener(object :
             OnSuccessListener<UploadTask.TaskSnapshot> {
             override fun onSuccess(p0: UploadTask.TaskSnapshot?) {
-                Utils.toast("Image uploaded.", this@AdvertiseActivity)
+                Utils.toast("Image uploaded.", activity!!)
 //                updateToDialog(numberOfPic)
             }
         }).addOnFailureListener{
-            Utils.iToast("Failed to upload the image to FireBase.", this)
+            Utils.iToast("Failed to upload the image to FireBase.", requireActivity())
         }
     }
 
@@ -225,13 +240,13 @@ class AdvertiseActivity : AppCompatActivity() {
             }
 
         }).addOnFailureListener {
-            Utils.iToast("fail to update to dialog", this)
+            Utils.iToast("fail to update to dialog", requireActivity())
         }
 
     }
 
     fun ConvertImageToHex(uri: Uri): ByteArray{
-        var bitmapImage: Bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uri)
+        var bitmapImage: Bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, uri)
         bitmapImage = Bitmap.createScaledBitmap(bitmapImage, 64, 64, false)
         val width = bitmapImage.width
         val height = bitmapImage.height
@@ -255,16 +270,16 @@ class AdvertiseActivity : AppCompatActivity() {
         Log.e(TAG, "BufferRGB24 = " + BufferRGB24[1])
         Log.e(TAG, "BufferRGB24 = " + BufferRGB24[2])
         Log.e(TAG, "BufferRGB24 = " + BufferRGB24[3])
-        binding.btnPreview.setOnClickListener {
+        btn_ad_preview.setOnClickListener {
             val imgToPreView = PreviewImage(uri)
-            binding.ivPreview.setImageBitmap(Bitmap.createScaledBitmap(imgToPreView, 300, 300, false))
+            iv_ad_preview.setImageBitmap(Bitmap.createScaledBitmap(imgToPreView, 300, 300, false))
             LookupInfo(uri)
         }
         return BufferRGB24
     }
 
     fun PreviewImage(uri: Uri): Bitmap {
-        val originBitmap: Bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uri)
+        val originBitmap: Bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, uri)
         val emptyImg: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.image_for_preview)
 
 //        val operation = Bitmap.createBitmap(200, 200, emptyImg.config)
@@ -300,11 +315,11 @@ class AdvertiseActivity : AppCompatActivity() {
         SetInformationHide(false)
         val imageName: String = listString[listString.size - 1]
         val imageNameString = imageName?.split(".")
-        binding.tvInfoName.setText(imageNameString[0])
-        val originBitmap: Bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uri)
+        tv_info_name.setText(imageNameString[0])
+        val originBitmap: Bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, uri)
         val sizeImage: String = originBitmap.width.toString() + " x " + originBitmap.height.toString()
-        binding.tvInfoSize.setText(sizeImage)
-        binding.tvInfoFormat.setText(imageNameString[1].toUpperCase())
-        binding.tvInfoLocation.setText(path)
+        tv_info_size.setText(sizeImage)
+        tv_info_format.setText(imageNameString[1].toUpperCase())
+        tv_info_location.setText(path)
     }
 }
