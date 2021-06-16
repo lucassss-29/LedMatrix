@@ -24,11 +24,11 @@
         <!-- <activity android:name=".ui.authentication.LoginActivity.LoginActivity" /> -->
         <activity android:name=".ui.bluetooth.ScanDevicesFragment"/>
 <!--        <activity android:name="com.example.advertise.AdvertiseActivity" />-->
-        <activity android:name=".ui.profile.ProfileActivity"/>
+<!--        <activity android:name=".ui.profile.ProfileActivity"/>-->
 <!--        <activity android:name=".ui.authentication.LoginActivity.LoginActivity" />-->
         <!--     <activity android:name=".ui.home.MainActivity"/>-->
            <!-- <activity android:name=".ui.profile.ProfileActivity"></activity> -->
-        <activity android:name="com.example.ledmatrix.ui.home.MainActivity">
+        <activity android:name=".ui.profile.ProfileActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

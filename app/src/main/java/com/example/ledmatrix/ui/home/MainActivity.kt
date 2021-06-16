@@ -6,17 +6,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.example.ledmatrix.R
-import com.example.ledmatrix.databinding.ActivityMainBinding
+import com.example.ledmatrix.databinding.ActivityMainViBinding
 import com.example.ledmatrix.ui.bluetooth.ScanDevicesFragment
 import com.example.ledmatrix.ui.bluetooth.ScanDevicesFragment.Companion.m_bluetoothSocket
 import com.example.ledmatrix.ui.bluetooth.ScanDevicesFragment.Companion.m_isConnected
 import com.example.ledmatrix.ui.profile.ProfileActivity
 import com.example.ledmatrix.utils.toast
-import com.google.android.gms.common.util.DataUtils
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -24,7 +22,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main_vi.*
 import kotlinx.android.synthetic.main.activity_profile.*
 import java.io.IOException
 
@@ -32,13 +30,13 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var storageReference: StorageReference
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainViBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        setContentView(R.layout.activity_main)
         supportActionBar?.hide()
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main_vi)
         storageReference = FirebaseStorage.getInstance().getReference()
         auth = Firebase.auth
 
