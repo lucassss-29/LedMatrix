@@ -1,29 +1,23 @@
 package com.example.advertise
 
-import android.animation.ObjectAnimator
 import android.app.Activity
 import android.app.AlertDialog
-import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Color
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import android.view.Window
 import android.view.animation.AnimationUtils
 import android.widget.Toast
-import androidx.core.graphics.scale
 import androidx.databinding.DataBindingUtil
 import com.example.ledmatrix.R
 import com.example.ledmatrix.databinding.ActivityAdvertiseBinding
-import com.example.ledmatrix.utils.iToast
-import com.example.ledmatrix.utils.toast
+import com.example.ledmatrix.utils.Utils
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
@@ -32,7 +26,6 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.dialog_advertise_history.*
@@ -160,7 +153,7 @@ class AdvertiseActivity : AppCompatActivity() {
                     pickImageFromGallary()
                 } else {
                     // permission from popup denied
-                    iToast("Permission denied")
+                    Utils.iToast("Permission denied", this)
                 }
             }
         }
@@ -179,7 +172,7 @@ class AdvertiseActivity : AppCompatActivity() {
             binding.btnPush.animation = animation
             binding.btnPush.setOnClickListener {
                 val result = ConvertImageToHex(uri)
-                toast("Push done!")
+                Utils.toast("Push done!", this)
 
                 // generate the file name randomly to store to the Firebase, avoiding duplicate name
                 val rnds = (0..100000).random()
@@ -192,7 +185,7 @@ class AdvertiseActivity : AppCompatActivity() {
         } else if (resultCode == ImagePicker.RESULT_ERROR){
             Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
         } else {
-            iToast("Cancelled")
+            Utils.iToast("Cancelled",this)
         }
     }
 
@@ -202,11 +195,11 @@ class AdvertiseActivity : AppCompatActivity() {
         fileRef.putFile(imageUri).addOnSuccessListener(object :
             OnSuccessListener<UploadTask.TaskSnapshot> {
             override fun onSuccess(p0: UploadTask.TaskSnapshot?) {
-                toast("Image uploaded.")
+                Utils.toast("Image uploaded.", this@AdvertiseActivity)
 //                updateToDialog(numberOfPic)
             }
         }).addOnFailureListener{
-            iToast("Failed to upload the image to FireBase.")
+            Utils.iToast("Failed to upload the image to FireBase.", this)
         }
     }
 
@@ -232,7 +225,7 @@ class AdvertiseActivity : AppCompatActivity() {
             }
 
         }).addOnFailureListener {
-            iToast("fail to update to dialog")
+            Utils.iToast("fail to update to dialog", this)
         }
 
     }

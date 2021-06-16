@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.ledmatrix.R
 import com.example.ledmatrix.databinding.ActivityLoginBinding
 import com.example.ledmatrix.ui.authentication.Register.RegisterActivity
-import com.example.ledmatrix.ui.home.HomeActivity
+import com.example.ledmatrix.ui.home.HomeFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -40,7 +40,7 @@ class LoginActivity : AppCompatActivity() {
                                 "Login success.",
                                 Toast.LENGTH_SHORT
                             ).show()
-                            val intent = Intent(this, HomeActivity::class.java)
+                            val intent = Intent(this, HomeFragment::class.java)
                             startActivity(intent)
                         } else {
                             // If sign in fails, display a message to the user.

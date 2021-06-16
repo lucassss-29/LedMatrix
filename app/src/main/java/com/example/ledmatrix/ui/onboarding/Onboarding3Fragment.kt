@@ -1,6 +1,5 @@
 package com.example.ledmatrix.ui.onboarding
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +10,6 @@ import androidx.fragment.app.commit
 import com.example.ledmatrix.R
 import androidx.fragment.app.replace
 import com.example.ledmatrix.ui.authentication.LoginFragmentDemo
-import com.example.ledmatrix.ui.home.HomeFragment
-import kotlinx.android.synthetic.main.activity_onboarding2.*
 import kotlinx.android.synthetic.main.activity_onboarding3.*
 
 class Onboarding3Fragment: Fragment() {
