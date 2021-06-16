@@ -20,7 +20,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LedMatrix">
-        <activity android:name=".ui.home.CommutorActivity"></activity>
+      <!--  <activity android:name=".ui.home.CommutorActivity"></activity> -->
         <activity
             android:name=".ui.onboarding.Onboarding3Fragment"
             tools:ignore="Instantiatable" />
@@ -32,11 +32,12 @@
             tools:ignore="Instantiatable" /> <!-- <activity android:name=".ui.onboarding.SplashActivity" /> -->
         <activity android:name=".ui.authentication.Register.RegisterActivity" />
         <activity android:name=".ui.authentication.LoginActivity.LoginActivity" />
+	    <activity android:name=".ui.bluetooth.ScanDevicesFragment"/>
         <activity android:name="com.example.advertise.AdvertiseActivity" />
         <activity android:name=".ui.profile.ProfileFragment" /> <!-- <activity android:name=".ui.authentication.LoginActivity.LoginActivity" /> -->
         <activity android:name=".ui.home.HomeFragment" /> <!-- <activity android:name=".ui.profile.ProfileActivity"></activity> -->
-        <activity android:name=".ui.onboarding.SplashActivity">
-
+        <activity android:name=".ui.onboarding.SplashActivity"/>
+        <activity android:name=".ui.home.CommutorActivity">
             <!-- <activity android:name="com.example.advertise.AdvertiseActivity"> -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -21,14 +21,17 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_home.*
 import androidx.fragment.app.replace
 import com.example.advertise.AdvertiseFragment
+import com.example.ledmatrix.ui.bluetooth.ScanDevicesFragment
+import com.example.ledmatrix.ui.bluetooth.ScanDevicesFragment.Companion.m_bluetoothSocket
+import com.example.ledmatrix.ui.bluetooth.ScanDevicesFragment.Companion.m_isConnected
 import com.example.ledmatrix.ui.profile.ProfileFragment
 import com.example.ledmatrix.utils.Utils.toast
+import java.io.IOException
 
 class HomeFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var storageReference: StorageReference
-    private lateinit var binding: ActivityHomeBinding
 
 
     override fun onCreateView(
@@ -59,7 +62,16 @@ class HomeFragment : Fragment() {
                 addToBackStack(null)
             }
         }
-
+        btnScanning.setOnClickListener {
+            parentFragmentManager.commit {
+                setReorderingAllowed(true)
+                replace<ScanDevicesFragment>(R.id.fragment_commutor)
+                addToBackStack(null)
+            }
+        }
+        btnDisconnect.setOnClickListener{
+            disconnect()
+        }
         iv_home_advertise.setOnClickListener {
             parentFragmentManager.commit {
                 setReorderingAllowed(true)
@@ -120,7 +132,19 @@ class HomeFragment : Fragment() {
 //            toast("Optional: Go to profile to setup infomation", requireActivity())
 //        }
 //    }
-
+private fun disconnect(){
+    if(m_bluetoothSocket != null){
+        try{
+            m_bluetoothSocket!!.close()
+            toast("Disconnected",requireActivity())
+            m_bluetoothSocket = null
+            m_isConnected = false
+        }catch (e: IOException){
+            e.printStackTrace()
+        }
+    }
+    //  finish()
+}
     companion object {
         val TAG = "Main Activity"
     }
