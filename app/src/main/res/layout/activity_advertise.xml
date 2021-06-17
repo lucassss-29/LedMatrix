@@ -13,6 +13,27 @@
         android:background="@drawable/green_header"
         tools:context=".ui.home.HomeFragment">
 
+        <RelativeLayout
+            android:id="@+id/progressbar_bg_advertise"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/progressbar_white"
+            android:elevation="12dp"
+            android:padding="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ProgressBar
+                android:id="@+id/progressbar_advertise"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerInParent="true" />
+
+        </RelativeLayout>
+
         <ImageView
             android:id="@+id/iv_ad_image"
             android:layout_width="380dp"
@@ -25,42 +46,49 @@
 
         <Button
             android:id="@+id/btn_ad_choose"
-            android:layout_width="390dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="0dp"
+            android:layout_height="43dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/button_bg"
             android:fontFamily="@font/sofia_pro_medium"
             android:text="Choose"
             app:backgroundTint="#29BF7F"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.413"
+            app:layout_constraintHorizontal_bias="0.492"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_ad_image" />
 
         <Button
             android:id="@+id/btn_ad_preview"
-            android:layout_width="180dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="176dp"
+            android:layout_height="46dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/button_bg"
             android:fontFamily="@font/sofia_pro_medium"
             android:text="preview"
             android:textColor="#C92B2C29"
             app:backgroundTint="#5483D163"
             app:icon="@drawable/ic_info"
+            app:layout_constraintEnd_toStartOf="@+id/btn_ad_push"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_ad_choose" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_advertise_history" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardView_info"
-            android:layout_width="386dp"
+            android:layout_width="0dp"
             android:layout_height="181dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
             app:cardCornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_advertise_history"
+            app:layout_constraintTop_toBottomOf="@+id/btn_ad_push"
             app:strokeColor="@color/black"
             app:strokeWidth="3dp">
 
@@ -208,10 +236,10 @@
 
         <Button
             android:id="@+id/btn_ad_push"
-            android:layout_width="182dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_width="183dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="12dp"
             android:background="@drawable/button_bg"
             android:fontFamily="@font/sofia_pro_medium"
             android:text="Push"
@@ -220,21 +248,24 @@
             app:icon="@drawable/ic_download"
             app:iconTint="#388E3C"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_ad_choose" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_advertise_history" />
 
         <Button
             android:id="@+id/btn_advertise_history"
-            android:layout_width="390dp"
+            android:layout_width="0dp"
             android:layout_height="43dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/button_bg"
-            android:text="View History"
             android:fontFamily="@font/sofia_pro_medium"
+            android:text="View History"
             app:icon="@drawable/ic_advertise_history"
             app:iconGravity="textStart"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_ad_preview" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_ad_choose" />
 
         <Button
             android:id="@+id/btn_ad_back"

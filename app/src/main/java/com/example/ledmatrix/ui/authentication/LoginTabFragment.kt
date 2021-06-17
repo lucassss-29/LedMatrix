@@ -29,19 +29,6 @@ class LoginTabFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupTransforming()
         login_btn.setOnClickListener {
-//            childFragmentManager.commit {
-//                setReorderingAllowed(true)
-//                setCustomAnimations(
-//                    R.anim.slide_in,
-//                    R.anim.fade_out,
-//                    R.anim.fade_in,
-//                    R.anim.slide_out
-//                )
-//                replace<HomeFragment>(R.id.fragment_home)
-//                Log.e(TAG, "homefragment")
-//                addToBackStack(null)
-//            }
-
             val intent = Intent(activity, CommutorActivity::class.java)
             startActivity(intent)
         }
