@@ -48,7 +48,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         storageReference = FirebaseStorage.getInstance().getReference()
         auth = Firebase.auth
-//        setupHomeInfo()
+        setupHomeInfo()
         home_profile_image.setOnClickListener {
 //            setContentView(R.layout.activity_main)
             parentFragmentManager.commit {
@@ -137,25 +137,26 @@ class HomeFragment : Fragment() {
 //        }
 //    }
 
-//    private fun setupHomeInfo() {
-//        val mail = auth.currentUser?.email.toString()
-//        val userName: List<String> = mail.split("@")
-//        Log.e(TAG, "userName " + userName)
-//        Log.e(TAG, "userName[1] = " + userName[0])
-//
-//        tv_home_welcome.setText("Welcome, " + userName[0].capitalize() + "!")
-//
-//        val profileRef: StorageReference =
-//            storageReference.child("users/" + auth.currentUser?.uid + "/profile.jpg")
-//        profileRef.downloadUrl.addOnSuccessListener(object : OnSuccessListener<Uri> {
-//            override fun onSuccess(uri: Uri?) {
-//                Picasso.get().load(uri).into(home_profile_image)
-//            }
-//
-//        }).addOnFailureListener {
-//            toast("Optional: Go to profile to setup infomation", requireActivity())
-//        }
-//    }
+    private fun setupHomeInfo() {
+        val mail = auth.currentUser?.email.toString()
+        val userName: List<String> = mail.split("@")
+        Log.e(TAG, "userName " + userName)
+        Log.e(TAG, "userName[1] = " + userName[0])
+
+        tv_home_welcome.setText("Welcome, " + userName[0].capitalize() + "!")
+
+        val profileRef: StorageReference =
+            storageReference.child("users/" + auth.currentUser?.uid + "/profile.jpg")
+        profileRef.downloadUrl.addOnSuccessListener(object : OnSuccessListener<Uri> {
+            override fun onSuccess(uri: Uri?) {
+                Picasso.get().load(uri).into(home_profile_image)
+            }
+
+        }).addOnFailureListener {
+            toast("Optional: Go to profile to setup infomation", requireActivity())
+        }
+    }
+
 private fun disconnect(){
     if(m_bluetoothSocket != null){
         try{
