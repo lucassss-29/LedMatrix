@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/login_background">
+        android:background="@drawable/login_bg">
 
 
         <TextView
@@ -31,7 +31,7 @@
             android:id="@+id/iv_profile_avatar"
             android:layout_width="96dp"
             android:layout_height="96dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="12dp"
             android:src="@drawable/ic_profile_avatar"
             app:civ_border_color="#FFFFFF"
             app:civ_border_width="2dp"
@@ -46,6 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="36dp"
+            android:layout_marginEnd="30dp"
             android:fontFamily="@font/sofia_pro_medium"
             android:text="Full Name"
             app:layout_constraintEnd_toEndOf="parent"
@@ -71,7 +72,7 @@
             android:id="@+id/imageView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="36dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_profile_avatar"
@@ -82,7 +83,7 @@
             android:id="@+id/imageView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="56dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView5"
@@ -117,7 +118,7 @@
             android:id="@+id/imageView12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="56dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView10"
@@ -153,9 +154,10 @@
             android:id="@+id/btn_profile_change_avatar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="40dp"
             android:layout_marginTop="56dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/button_bg"
             android:fontFamily="@font/sofia_pro_medium"
             android:text="Change Profile Avatar"
             android:textColor="#0D7137"
@@ -168,16 +170,18 @@
             android:id="@+id/btn_profile_logout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="104dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/button_bg"
             android:fontFamily="@font/sofia_pro_medium"
             android:text="Logout"
-            android:textColor="#0D7137"
-            app:backgroundTint="#F8F5F6"
+            android:textColor="#F1F4F2"
+            app:backgroundTint="#D86666"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView18" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_profile_change_avatar" />
 
         <Button
             android:id="@+id/btn_profile_back"
