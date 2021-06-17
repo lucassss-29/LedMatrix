@@ -27,6 +27,8 @@
         <activity
             android:name=".ui.onboarding.Onboarding2Fragment"
             tools:ignore="Instantiatable" />
+        <activity android:name=".ui.painting.PaintMainActivity"
+            tools:ignore="Instantiatable"/>
         <activity
             android:name=".ui.onboarding.Onboarding1Fragment"
             tools:ignore="Instantiatable" /> <!-- <activity android:name=".ui.onboarding.SplashActivity" /> -->

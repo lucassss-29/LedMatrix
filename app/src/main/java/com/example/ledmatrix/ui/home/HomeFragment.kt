@@ -1,5 +1,6 @@
 package com.example.ledmatrix.ui.home
 
+import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -24,6 +25,7 @@ import com.example.advertise.AdvertiseFragment
 import com.example.ledmatrix.ui.bluetooth.ScanDevicesFragment
 import com.example.ledmatrix.ui.bluetooth.ScanDevicesFragment.Companion.m_bluetoothSocket
 import com.example.ledmatrix.ui.bluetooth.ScanDevicesFragment.Companion.m_isConnected
+import com.example.ledmatrix.ui.painting.PaintMainActivity
 import com.example.ledmatrix.ui.profile.ProfileFragment
 import com.example.ledmatrix.ui.project.InfoFragment
 import com.example.ledmatrix.utils.Utils.toast
@@ -109,6 +111,12 @@ class HomeFragment : Fragment() {
                 addToBackStack(null)
             }
         }
+
+        btn_home_paint.setOnClickListener {
+            val intent = Intent(activity,PaintMainActivity :: class.java)
+            startActivity(intent)
+            }
+
 
 
     }
