@@ -22,6 +22,7 @@ import kotlinx.android.synthetic.main.activity_home.*
 import androidx.fragment.app.replace
 import com.example.advertise.AdvertiseFragment
 import com.example.ledmatrix.ui.profile.ProfileFragment
+import com.example.ledmatrix.ui.project.InfoFragment
 import com.example.ledmatrix.utils.Utils.toast
 
 class HomeFragment : Fragment() {
@@ -70,6 +71,20 @@ class HomeFragment : Fragment() {
                     R.anim.slide_out
                 )
                 replace<AdvertiseFragment>(R.id.fragment_commutor)
+                addToBackStack(null)
+            }
+        }
+
+        tv_home_info.setOnClickListener {
+            parentFragmentManager.commit {
+                setReorderingAllowed(true)
+                setCustomAnimations(
+                    R.anim.slide_in,
+                    R.anim.fade_out,
+                    R.anim.fade_in,
+                    R.anim.slide_out
+                )
+                replace<InfoFragment>(R.id.fragment_commutor)
                 addToBackStack(null)
             }
         }

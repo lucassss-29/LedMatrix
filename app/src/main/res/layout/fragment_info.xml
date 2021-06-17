@@ -3,19 +3,85 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/project_bg"
     android:layout_height="match_parent"
     tools:context=".ui.project.InfoFragment">
 
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="472dp"
-        android:layout_height="262dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/project_image_corner"
-        android:src="@drawable/about_bg"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="336dp"
+        android:layout_height="504dp"
+        android:layout_marginTop="172dp"
+        android:background="@drawable/corner_image_for_project"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="289dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/sofia_pro_medium"
+            android:text="About us"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.514"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_info_back"
+            android:layout_width="299dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/button_bg"
+            android:text="Back to home"
+            app:backgroundTint="#DD680F"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.405"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="292dp"
+            android:layout_height="249dp"
+            android:fontFamily="@font/sofia_pro_medium"
+            android:text="Với sự phát triển của tất cả các ngành nghề, việc truyền tải thông tin, truyền tải hình ảnh đã là phương thức tiếp thị đạt hiệu quả cao đến người dùng. Việc điều khiển các bảng led có thể thực hiện thông qua trên điện thoại bằng các thao tác đơn giản như chọn file hoặc truyền dữ liệu trực tiếp sẽ giúp người dùng đạt hiệu quả hơn trong công việc."
+            android:textAlignment="inherit"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="294dp"
+            android:layout_height="90dp"
+            android:fontFamily="@font/sofia_pro_medium"
+            android:text="Release Date: 17/06/2021. Ứng dụng thuộc sở hữu của các thành viên khoa DTVT Khóa 2017."
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.466"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="128dp"
+        android:fontFamily="@font/sofia_pro_medium"
+        android:text="Led Matrix"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
