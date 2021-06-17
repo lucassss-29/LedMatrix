@@ -21,7 +21,10 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import com.example.ledmatrix.R
+import com.example.ledmatrix.ui.home.HomeFragment
 import com.example.ledmatrix.utils.Utils.showToast
 import com.example.ledmatrix.utils.Utils.toast
 import kotlinx.android.synthetic.main.activity_scan_devices.*
@@ -84,6 +87,19 @@ class ScanDevicesFragment : Fragment() {
                 context?.registerReceiver(mBroadcastReceiver, discoverDeviceIntent)
             }
         }
+
+        btn_scandv_back.setOnClickListener {
+            parentFragmentManager.commit {
+                setReorderingAllowed(true)
+                setCustomAnimations(
+                    R.anim.fade_in,
+                    R.anim.slide_out
+                )
+                replace<HomeFragment>(R.id.fragment_commutor)
+            }
+        }
+
+
         nAdapter = DeviceListAdapter()
         recyclerView.apply {
             adapter = nAdapter

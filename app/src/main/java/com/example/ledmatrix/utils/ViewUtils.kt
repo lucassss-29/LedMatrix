@@ -19,6 +19,5 @@ object Utils {
     // custom red toast
     fun iToast(msg: String?, ctx: Context?){
         StyleableToast.makeText(ctx!!, msg, R.style.toast_style).show()
-
     }
 }

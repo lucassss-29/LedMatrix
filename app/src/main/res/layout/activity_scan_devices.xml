@@ -19,6 +19,7 @@
             android:layout_marginStart="156dp"
             android:layout_marginEnd="156dp"
             android:layout_marginBottom="61dp"
+            android:fontFamily="@font/sofia_pro_medium"
             android:background="@drawable/circle_button"
             android:text="Refresh"
             app:backgroundTint="@color/purple_700"
@@ -43,8 +44,8 @@
 
         <pl.bclogic.pulsator4droid.library.PulsatorLayout
             android:id="@+id/pulsator"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="408dp"
+            android:layout_height="725dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,9 +55,26 @@
             app:pulse_duration="7000"
             app:pulse_interpolator="AccelerateDecelerate"
             app:pulse_repeat="0"
-            app:pulse_startFromScratch="true">
+            app:pulse_startFromScratch="true"
+            tools:ignore="MissingClass">
 
         </pl.bclogic.pulsator4droid.library.PulsatorLayout>
+
+        <Button
+            android:id="@+id/btn_scandv_back"
+            android:layout_width="112dp"
+            android:layout_height="53dp"
+            android:background="#00FFFFFF"
+            android:fontFamily="@font/sofia_pro_medium"
+            android:text="Home"
+            android:textAllCaps="false"
+            android:textColor="#124728"
+            android:textSize="18sp"
+            app:icon="@drawable/ic_arrow_back"
+            app:iconPadding="0dp"
+            app:iconTint="#124728"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

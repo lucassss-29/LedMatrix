@@ -65,6 +65,12 @@ class HomeFragment : Fragment() {
         btnScanning.setOnClickListener {
             parentFragmentManager.commit {
                 setReorderingAllowed(true)
+                setCustomAnimations(
+                    R.anim.slide_in,
+                    R.anim.fade_out,
+                    R.anim.fade_in,
+                    R.anim.slide_out
+                )
                 replace<ScanDevicesFragment>(R.id.fragment_commutor)
                 addToBackStack(null)
             }
