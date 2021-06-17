@@ -63,6 +63,7 @@ class HomeFragment : Fragment() {
                 addToBackStack(null)
             }
         }
+
         btnScanning.setOnClickListener {
             parentFragmentManager.commit {
                 setReorderingAllowed(true)
@@ -76,9 +77,11 @@ class HomeFragment : Fragment() {
                 addToBackStack(null)
             }
         }
+
         btnDisconnect.setOnClickListener{
             disconnect()
         }
+
         iv_home_advertise.setOnClickListener {
             parentFragmentManager.commit {
                 setReorderingAllowed(true)
