@@ -185,7 +185,7 @@
 
         <Button
             android:id="@+id/btn_profile_back"
-            android:layout_width="112dp"
+            android:layout_width="120dp"
             android:layout_height="53dp"
             android:background="#00FFFFFF"
             android:fontFamily="@font/sofia_pro_medium"

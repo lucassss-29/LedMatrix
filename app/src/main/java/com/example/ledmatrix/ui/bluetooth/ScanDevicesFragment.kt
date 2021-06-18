@@ -59,6 +59,7 @@ class ScanDevicesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         m_bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+
         if(m_bluetoothAdapter == null){
             toast("this device doesn't support bluetooth",requireActivity())
             return
@@ -67,22 +68,22 @@ class ScanDevicesFragment : Fragment() {
             val enableBluetoothIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
             startActivityForResult(enableBluetoothIntent, REQUEST_ENABLE_BLUETOOTH)
         }
+
         btn_refresh.setOnClickListener {
             pulsator.stop()
             list.clear()
             if (m_bluetoothAdapter.isDiscovering) {
                 m_bluetoothAdapter.cancelDiscovery()
-                 checkBTPermissions()
+                checkBTPermissions()
                 m_bluetoothAdapter.startDiscovery()
                 pulsator.start()
                 val discoverDeviceIntent = IntentFilter(BluetoothDevice.ACTION_FOUND)
                 context?.registerReceiver(mBroadcastReceiver, discoverDeviceIntent)
             }
             if(!m_bluetoothAdapter.isDiscovering){
-                 checkBTPermissions()
+                checkBTPermissions()
                 m_bluetoothAdapter.startDiscovery()
                 pulsator.start()
-                // val discoverDeviceIntent = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION).apply { BluetoothDevice.ACTION_FOUND }
                 val discoverDeviceIntent = IntentFilter(BluetoothDevice.ACTION_FOUND )
                 context?.registerReceiver(mBroadcastReceiver, discoverDeviceIntent)
             }
@@ -99,14 +100,15 @@ class ScanDevicesFragment : Fragment() {
             }
         }
 
-
         nAdapter = DeviceListAdapter()
         recyclerView.apply {
             adapter = nAdapter
         }
         nAdapter.nListener = object : DeviceListAdapter.DeviceAdapterListener{
             override fun nOnClickbtnPair(device: BluetoothDevice) {
-                activity?.let { ConnectToDevice(it,device.address).execute() }
+                activity?.let {
+                    ConnectToDevice(it,device.address).execute()
+                }
             }
         }
     }
@@ -118,6 +120,7 @@ class ScanDevicesFragment : Fragment() {
                 if (device != null) {
                     if(!list.contains(device)) {
                         list.add(device)
+                        /*add data to list*/
                         nAdapter.nData = list
                     }
                 }
@@ -130,7 +133,16 @@ class ScanDevicesFragment : Fragment() {
         checkBTPermissions()
         m_bluetoothAdapter.startDiscovery()
         pulsator.start()
-        // val discoverDeviceIntent = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION).apply { BluetoothDevice.ACTION_FOUND }
+        val discoverDeviceIntent = IntentFilter(BluetoothDevice.ACTION_FOUND )
+        context?.registerReceiver(mBroadcastReceiver, discoverDeviceIntent)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    override fun onResume() {
+        super.onResume()
+        checkBTPermissions()
+        m_bluetoothAdapter.startDiscovery()
+        pulsator.start()
         val discoverDeviceIntent = IntentFilter(BluetoothDevice.ACTION_FOUND )
         context?.registerReceiver(mBroadcastReceiver, discoverDeviceIntent)
     }
@@ -188,6 +200,8 @@ class ScanDevicesFragment : Fragment() {
                 m_isConnected = true
             }
             m_progress.dismiss()
+            toast("Connected",context)
+
         }
     }
     @RequiresApi(Build.VERSION_CODES.M)

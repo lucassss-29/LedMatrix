@@ -1,7 +1,9 @@
 package com.example.ledmatrix.ui.painting
 
 import android.content.ContentValues
+import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -10,50 +12,42 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ledmatrix.R
+import com.example.ledmatrix.ui.home.CommutorActivity
 import com.google.android.material.slider.RangeSlider
+import kotlinx.android.synthetic.main.activity_paint.*
 import java.io.OutputStream
-
-//import kotlinx.android.synthetic.main.fragment_material_color_picker.*
-//import kotlinx.android.synthetic.main.colorpicker.*
 
 
 lateinit var paint: DrawView
-lateinit var save: ImageButton
-lateinit var color: ImageButton
-lateinit var stroke: ImageButton
-lateinit var undo: ImageButton
 lateinit var rangeSlider: RangeSlider
 
 
  class PaintMainActivity : AppCompatActivity(), CommunicatorColor {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_paint)
-
         //getting the reference of the views from their ids
-        paint = findViewById<View>(R.id.draw_view) as DrawView
-        rangeSlider = findViewById<View>(R.id.rangebar) as RangeSlider
-        undo = findViewById<View>(R.id.btn_undo) as ImageButton
-        save = findViewById<View>(R.id.btn_save) as ImageButton
-        color = findViewById<View>(R.id.btn_color) as ImageButton
-        stroke = findViewById<View>(R.id.btn_stroke) as ImageButton
-
+        paint = findViewById<View>(R.id.draw_view_paint) as DrawView
 
         //creating a OnClickListener for each button, to perform certain actions
-
         //the undo button will remove the most recent stroke from the canvas
-        undo.setOnClickListener {
+        btn_paint_earse.setOnClickListener {
             paint.undo()
         }
-//----------------------------------------------------
-//        SAVE
-//in form of PNG, in the storage
 
-
-        //the save button will save the current canvas which is actually a bitmap
-        //in form of PNG, in the storage
-        save.setOnClickListener {
+        btn_paint_back.setOnClickListener{
+            val intent = Intent(this, CommutorActivity::class.java)
+            startActivity(intent)
+        }
+        btnClear.setOnClickListener {
+            paint.clear()
+        }
+        /*----------------------------------------------------
+         SAVE
+        in form of PNG, in the storage
+        the save button will save the current canvas which is actually a bitmap
+        in form of PNG, in the storage*/
+        btn_paint_save.setOnClickListener {
             //getting the bitmap from DrawView class
             val bmp = paint.save()
             //opening a OutputStream to write into the file
@@ -82,18 +76,14 @@ lateinit var rangeSlider: RangeSlider
 
 //-----------------------------------------------------
 //        COLOR
-
-
-
-        color.setOnClickListener {
+        btn_paint_color.setOnClickListener {
             var dialog = CustomDialogFragment()
             dialog.show(supportFragmentManager, "CustomDialog")
         }
 
-
 //---------------------------------------------------------------------------------------
         // the button will toggle the visibility of the RangeBar/RangeSlider
-        stroke.setOnClickListener {
+        btn_paint_stroke.setOnClickListener {
             if (rangeSlider.visibility == View.VISIBLE) rangeSlider.visibility = View.GONE
             else rangeSlider.visibility = View.VISIBLE
         }
@@ -124,10 +114,7 @@ lateinit var rangeSlider: RangeSlider
     override fun passData(editTextInput: String) {
         val bundle = Bundle()
         bundle.putString("message", editTextInput)
-
         val transaction = this.supportFragmentManager.beginTransaction()
-
-
     }
 
 

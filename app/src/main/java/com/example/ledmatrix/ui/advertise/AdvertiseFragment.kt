@@ -5,8 +5,8 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.drawable.Drawable
+import android.graphics.Matrix
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -18,14 +18,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
 import com.example.ledmatrix.R
-import com.example.ledmatrix.databinding.ActivityAdvertiseBinding
+import com.example.ledmatrix.ui.bluetooth.ScanDevicesFragment.Companion.m_bluetoothSocket
+import com.example.ledmatrix.ui.bluetooth.ScanDevicesFragment.Companion.m_isConnected
 import com.example.ledmatrix.ui.home.HomeFragment
 import com.example.ledmatrix.utils.Utils
 import com.github.dhaval2404.imagepicker.ImagePicker
@@ -38,17 +37,10 @@ import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_advertise.*
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_profile.*
-import kotlinx.android.synthetic.main.dialog_advertise_history.*
 import kotlinx.android.synthetic.main.dialog_advertise_history.view.*
 import java.io.IOException
-import java.io.InputStream
-import java.net.HttpURLConnection
-import java.net.URL
 
 
-private lateinit var binding: ActivityAdvertiseBinding
 private lateinit var storageReference: StorageReference
 private lateinit var auth: FirebaseAuth
 
@@ -106,6 +98,7 @@ class AdvertiseFragment : Fragment() {
             dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
             Utils.progressBar(progressbar_bg_advertise, "show")
             // recall the history from firebase
+
             val profileRef: StorageReference =
                 storageReference.child("advertising/" + auth.currentUser?.uid + "/" + "image.jpg")
             profileRef.downloadUrl.addOnSuccessListener(object : OnSuccessListener<Uri> {
@@ -214,7 +207,7 @@ class AdvertiseFragment : Fragment() {
         if (resultCode == Activity.RESULT_OK) { // && requestCode == IMAGE_PICK_CODE
             val uri: Uri = data?.data!!
             iv_ad_image.setImageURI(uri)
-            ConvertImageToHex(uri)
+            //ConvertImageToHex(uri)
             SetPreViewButtonHide(false)
             SetPushButtonHide(false)
 
@@ -231,23 +224,25 @@ class AdvertiseFragment : Fragment() {
     }
 
     // This function is generate Bitmap array
-    private fun buttonPushListener(uri: Uri, isFireBase: Boolean): ByteArray {
-        var resultBitmap: ByteArray = byteArrayOf(0x00)
+    private fun buttonPushListener(uri: Uri, isFireBase: Boolean){
         val animation = AnimationUtils.loadAnimation(requireActivity(), R.anim.shake)
         btn_ad_push.animation = animation
         btn_ad_push.setOnClickListener {
-            if (isFireBase) {
-                ConvertImageToHexFirebase(uri)
-                Utils.toast("Push done!", requireActivity())
-            } else {
-                resultBitmap = ConvertImageToHex(uri)
-                Utils.toast("Push done!", requireActivity())
-                uploadtoFirebase(uri)
+            sendCommand(ConvertImageToHex(iv_ad_image))
+            Utils.toast("Push done!", requireActivity())
+            uploadtoFirebase(uri)
+        }
+    }
+    private fun sendCommand(input: ByteArray){
+        //  binding.progressBar.visibility = View.VISIBLE
+        if(m_bluetoothSocket!=null){
+            try {
+                m_bluetoothSocket!!.outputStream.write(input)
+            }catch (e: IOException){
+                e.printStackTrace()
             }
         }
-        return resultBitmap
     }
-
     private fun buttonPreviewListener(uri: Uri){
         btn_ad_preview.setOnClickListener {
             Utils.progressBar(progressbar_bg_advertise,"show")
@@ -257,7 +252,7 @@ class AdvertiseFragment : Fragment() {
             }, 1000)
         }
     }
-
+/*
     private fun ConvertImageToHexFirebase(uri: Uri) {
         val BufferRGB24 = ByteArray(64 * 64 * 3)
         Glide.with(requireActivity())
@@ -298,10 +293,10 @@ class AdvertiseFragment : Fragment() {
                 }
             })
     }
-
+*/
     fun uploadtoFirebase(imageUri: Uri) {
         val fileRef: StorageReference =
-            storageReference.child("advertising/" + auth.currentUser?.uid + "/" + "image.jpg")
+            storageReference.child("advertising/" + auth.currentUser?.uid + "/" +  "image.jpg")
         fileRef.putFile(imageUri).addOnSuccessListener(object :
             OnSuccessListener<UploadTask.TaskSnapshot> {
             override fun onSuccess(p0: UploadTask.TaskSnapshot?) {
@@ -311,21 +306,23 @@ class AdvertiseFragment : Fragment() {
             Utils.iToast("Failed to upload the image to FireBase.", requireActivity())
         }
     }
-
-    fun ConvertImageToHex(uri: Uri): ByteArray {
-        var bitmapImage: Bitmap = Images.Media.getBitmap(activity?.contentResolver, uri)
-        bitmapImage = Bitmap.createScaledBitmap(bitmapImage, 64, 64, false)
-        val width = bitmapImage.width
-        val height = bitmapImage.height
-        Log.e(TAG, "width = " + width)
-        Log.e(TAG, "height = " + height)
+    fun Bitmap.flip(): Bitmap {
+        val matrix = Matrix().apply { postScale(-1f, 1f) }
+        return Bitmap.createBitmap(this, 0, 0, width, height, matrix, true)
+    }
+    fun ConvertImageToHex(img : ImageView) : ByteArray {
+        var bitmapImage = (img.getDrawable() as BitmapDrawable).bitmap
+        bitmapImage = Bitmap.createScaledBitmap(bitmapImage, 64, 64, true)
+        val flippedBitmap = bitmapImage.flip()
+        val width = flippedBitmap.width
+        val height = flippedBitmap.height
         val BufferRGB24 = ByteArray(width * height * 3)
         var R: Int
         var G: Int
         var B: Int
         for (i in 0 until height) {
             for (j in 0 until width) {
-                val pixel = bitmapImage.getPixel(i, j)
+                val pixel = flippedBitmap.getPixel(i, j)
                 R = (pixel shr 16) and 0xff
                 G = (pixel shr 8) and 0xff
                 B = pixel and 0xff
@@ -334,12 +331,6 @@ class AdvertiseFragment : Fragment() {
                 BufferRGB24[(i * width) + ((64 * 64) * 2) + j] = B.toByte()
             }
         }
-        btn_ad_preview.setOnClickListener {
-//            lookupInfo(uri)
-        }
-        Log.e(TAG, "BufferRGB24" + BufferRGB24)
-        Log.e(TAG, "BufferRGB24[0]" + BufferRGB24[0])
-        Log.e(TAG, "BufferRGB24[0]" + BufferRGB24[1])
         return BufferRGB24
     }
 
@@ -362,5 +353,13 @@ class AdvertiseFragment : Fragment() {
         tv_info_size.setText(sizeImage)
         tv_info_format.setText(imageNameString[1].toUpperCase())
         tv_info_location.setText(path)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.e("TAG------------","STOPPPPPPPPPPPPPPPPP")
+        if(m_bluetoothSocket == null || !m_isConnected) {
+            m_bluetoothSocket!!.close()
+        }
     }
 }

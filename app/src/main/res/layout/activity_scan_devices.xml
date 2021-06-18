@@ -31,7 +31,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="202dp"
+            android:layout_height="190dp"
             android:isScrollContainer="false"
             android:scrollbarSize="10dp"
             android:scrollbarStyle="insideOverlay"
@@ -40,29 +40,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <pl.bclogic.pulsator4droid.library.PulsatorLayout
-            android:id="@+id/pulsator"
-            android:layout_width="408dp"
-            android:layout_height="725dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/recyclerView"
-            app:pulse_color="@color/colorBL"
-            app:pulse_count="5"
-            app:pulse_duration="7000"
-            app:pulse_interpolator="AccelerateDecelerate"
-            app:pulse_repeat="0"
-            app:pulse_startFromScratch="true"
-            tools:ignore="MissingClass">
-
-        </pl.bclogic.pulsator4droid.library.PulsatorLayout>
+            app:layout_constraintTop_toBottomOf="@+id/btn_scandv_back" />
 
         <Button
             android:id="@+id/btn_scandv_back"
-            android:layout_width="112dp"
+            android:layout_width="120dp"
             android:layout_height="53dp"
             android:background="#00FFFFFF"
             android:fontFamily="@font/sofia_pro_medium"
@@ -75,6 +57,26 @@
             app:iconTint="#124728"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <pl.bclogic.pulsator4droid.library.PulsatorLayout
+            android:id="@+id/pulsator"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/recyclerView"
+            app:layout_constraintVertical_bias="0.0"
+            app:pulse_color="@color/colorBL"
+            app:pulse_count="5"
+            app:pulse_duration="7000"
+            app:pulse_interpolator="AccelerateDecelerate"
+            app:pulse_repeat="0"
+            app:pulse_startFromScratch="true"
+            tools:ignore="MissingClass">
+
+        </pl.bclogic.pulsator4droid.library.PulsatorLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

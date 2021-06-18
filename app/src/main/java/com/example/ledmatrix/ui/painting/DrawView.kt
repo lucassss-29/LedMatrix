@@ -6,6 +6,8 @@ import android.graphics.Bitmap
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import com.example.ledmatrix.ui.bluetooth.ScanDevicesFragment.Companion.m_bluetoothSocket
+import java.io.IOException
 import java.util.*
 
 
@@ -80,6 +82,15 @@ class DrawView @JvmOverloads constructor(context: Context?, attrs: AttributeSet?
         return mBitmap
     }
 
+    fun clear(){
+        mCanvas.drawColor(Color.WHITE)
+        mCanvas.drawBitmap(mBitmap, 0f, 0f, mBitmapPaint)
+        mX = 0f
+        mY = 0f
+        paths.clear()
+        sendCommand(ConvertImageToHex(mBitmap))
+
+    }
     //this is the main method where the actual drawing takes place
     override fun onDraw(canvas: Canvas) {
         //save the current state of the canvas before,
@@ -95,7 +106,9 @@ class DrawView @JvmOverloads constructor(context: Context?, attrs: AttributeSet?
             mPaint.strokeWidth = fp.strokeWidth.toFloat()
             mCanvas.drawPath(fp.path, mPaint)
         }
+
         canvas.drawBitmap(mBitmap, 0f, 0f, mBitmapPaint)
+
         canvas.restore()
     }
 
@@ -133,6 +146,7 @@ class DrawView @JvmOverloads constructor(context: Context?, attrs: AttributeSet?
     //the end position
     private fun touchUp() {
         mPath.lineTo(mX, mY)
+        sendCommand(ConvertImageToHex(mBitmap))
     }
 
     //the onTouchEvent() method provides us with the information about the type of motion
@@ -155,6 +169,43 @@ class DrawView @JvmOverloads constructor(context: Context?, attrs: AttributeSet?
             }
         }
         return true
+    }
+    private fun sendCommand(input: ByteArray){
+        if(m_bluetoothSocket !=null){
+            try {
+                m_bluetoothSocket!!.outputStream.write(input)
+            }catch (e: IOException){
+                e.printStackTrace()
+            }
+        }
+    }
+    fun Bitmap.flip(): Bitmap {
+        val matrix = Matrix().apply { postScale(-1f, 1f) }
+        return Bitmap.createBitmap(this, 0, 0, width, height, matrix, true)
+    }
+
+    fun ConvertImageToHex(img : Bitmap) : ByteArray {
+        val bitmapImage = Bitmap.createScaledBitmap(img, 64, 64, true)
+        val flippedBitmap = bitmapImage.flip()
+        // var bitmapImage: Bitmap = Images.Media.getBitmap(activity?.contentResolver, uri)
+        val width = flippedBitmap.width
+        val height = flippedBitmap.height
+        val BufferRGB24 = ByteArray(width * height * 3)
+        var R: Int
+        var G: Int
+        var B: Int
+        for (i in 0 until height) {
+            for (j in 0 until width) {
+                val pixel = flippedBitmap.getPixel(i, j)
+                R = (pixel shr 16) and 0xff
+                G = (pixel shr 8) and 0xff
+                B = pixel and 0xff
+                BufferRGB24[i * width + j] = R.toByte()
+                BufferRGB24[(i * width) + 64 * 64 + j] = G.toByte()
+                BufferRGB24[(i * width) + ((64 * 64) * 2) + j] = B.toByte()
+            }
+        }
+        return BufferRGB24
     }
 
     companion object {

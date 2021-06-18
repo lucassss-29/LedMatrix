@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.fragment.app.DialogFragment
 import com.example.ledmatrix.R
+import kotlinx.android.synthetic.main.activity_paint.*
 import kotlinx.android.synthetic.main.color_fragment.view.*
 
 class CustomDialogFragment: DialogFragment() {
