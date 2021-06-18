@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/green_checked_bg"
     tools:context=".ui.painting.PaintMainActivity">
 
 
@@ -16,40 +17,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/btn_undo"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/ic__erase"
-                android:text="Undo" />
-
-            <ImageButton
-                android:id="@+id/btn_save"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/ic_floppy_disk"
-                android:text="Save" />
-
-        <ImageButton
-            android:id="@+id/btn_color"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/ic_colorpicker"
-            android:text="Color" />
-
-            <ImageButton
-                android:id="@+id/btn_stroke"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/ic_paint_brush"
-                android:text="Stroke" />
-        </LinearLayout>
+            android:orientation="horizontal"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -66,9 +34,90 @@
 
     <com.example.ledmatrix.ui.painting.DrawView
         android:id="@+id/draw_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="375dp"
+        android:layout_height="571dp"
         android:layout_below="@id/linear"
-        android:layout_centerInParent="true" />
+        android:layout_centerInParent="true"
+        android:layout_marginTop="139dp"
+        android:background="@drawable/corner_image_for_project" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="75dp"
+        android:background="@drawable/button_draw_bg"
+        app:backgroundTint="#FFFFFF"
+        app:icon="@drawable/ic__erase"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconSize="0dp"
+        app:iconTint="#101010" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="73dp"
+        android:layout_marginEnd="150dp"
+        android:background="@drawable/button_draw_bg"
+        app:backgroundTint="#FFFFFF"
+        app:icon="@drawable/ic_color_picker"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconSize="35dp"
+        app:iconTint="#00C8BDBD"
+        app:iconTintMode="src_atop" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="75dp"
+        android:background="@drawable/button_draw_bg"
+        app:backgroundTint="#FFFFFF"
+        app:icon="@drawable/ic_baseline_check_24"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconSize="0dp"
+        app:iconTint="#0C0C0C"
+        app:iconTintMode="src_atop" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="73dp"
+        android:layout_marginEnd="66dp"
+        android:background="@drawable/button_draw_bg"
+        app:backgroundTint="#FFFFFF"
+        app:icon="@drawable/ic_paint_brush"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconSize="0dp"
+        app:iconTint="#00040404"
+        app:iconTintMode="add" />
+
+    <Button
+        android:layout_width="112dp"
+        android:layout_height="53dp"
+        android:background="#00FFFFFF"
+        android:fontFamily="@font/sofia_pro_medium"
+        android:text="Home"
+        android:textAllCaps="false"
+        android:textColor="#FEFFFF"
+        android:textSize="18sp"
+        app:icon="@drawable/ic_arrow_back"
+        app:iconPadding="0dp"
+        app:iconTint="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </RelativeLayout>
