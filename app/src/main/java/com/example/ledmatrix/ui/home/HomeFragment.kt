@@ -1,5 +1,7 @@
 package com.example.ledmatrix.ui.home
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +25,7 @@ import kotlinx.android.synthetic.main.activity_home.*
 import androidx.fragment.app.replace
 import com.example.advertise.AdvertiseFragment
 import com.example.ledmatrix.ui.bluetooth.ScanDevicesFragment
+import com.example.ledmatrix.ui.bluetooth.ScanDevicesFragment.Companion.EXTRA_NAME
 import com.example.ledmatrix.ui.bluetooth.ScanDevicesFragment.Companion.m_bluetoothSocket
 import com.example.ledmatrix.ui.bluetooth.ScanDevicesFragment.Companion.m_isConnected
 import com.example.ledmatrix.ui.painting.PaintMainActivity
@@ -166,16 +169,27 @@ class HomeFragment : Fragment() {
     }
 
 private fun disconnect(){
-    if(m_bluetoothSocket != null){
-        try{
-            m_bluetoothSocket!!.close()
-            toast("Disconnected",requireActivity())
-            m_bluetoothSocket = null
-            m_isConnected = false
-        }catch (e: IOException){
-            e.printStackTrace()
+    val alertDialog = AlertDialog.Builder(requireActivity()).create()
+
+    alertDialog.setTitle("DISCONNECT BLUETOOTH")
+    alertDialog.setMessage("Do you want disconnect with "+ EXTRA_NAME)
+    alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes"
+    ) { dialog, which ->
+        if(m_bluetoothSocket != null){
+            try{
+                m_bluetoothSocket!!.close()
+                toast("Disconnected",requireActivity())
+                m_bluetoothSocket = null
+                m_isConnected = false
+            }catch (e: IOException){
+                e.printStackTrace()
+            }
         }
+        dialog.dismiss()
     }
+    alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No"
+    ) { dialog, which -> dialog.dismiss() }
+    alertDialog.show()
     //  finish()
 }
     companion object {

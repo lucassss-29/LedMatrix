@@ -37,7 +37,7 @@ class ScanDevicesFragment : Fragment() {
 
     private val REQUEST_ENABLE_BLUETOOTH = 1
     companion object{
-        val EXTRA_ADDRESS : String = "Device_address"
+        lateinit var EXTRA_NAME : String
         var m_myUUID: UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
         lateinit var m_progress: ProgressDialog
         var m_bluetoothSocket: BluetoothSocket? = null
@@ -108,6 +108,7 @@ class ScanDevicesFragment : Fragment() {
             override fun nOnClickbtnPair(device: BluetoothDevice) {
                 activity?.let {
                     ConnectToDevice(it,device.address).execute()
+                    EXTRA_NAME = device.name
                 }
             }
         }
@@ -209,7 +210,7 @@ class ScanDevicesFragment : Fragment() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             var permissionCheck = checkSelfPermission(requireContext(),"Manifest.permission.ACCESS_FINE_LOCATION",)
             permissionCheck += checkSelfPermission(requireContext(),"Manifest.permission.ACCESS_COARSE_LOCATION")
-            if (permissionCheck != 0) {
+            if (permissionCheck == 0) {
                 requestPermissions(
                     arrayOf(
                         Manifest.permission.ACCESS_FINE_LOCATION,

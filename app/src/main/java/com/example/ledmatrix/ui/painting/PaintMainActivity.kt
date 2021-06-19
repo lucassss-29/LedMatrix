@@ -10,9 +10,11 @@ import android.provider.MediaStore
 import android.view.View
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ledmatrix.R
 import com.example.ledmatrix.ui.home.CommutorActivity
+import com.example.ledmatrix.utils.Utils.toast
 import com.google.android.material.slider.RangeSlider
 import kotlinx.android.synthetic.main.activity_paint.*
 import java.io.OutputStream
@@ -69,6 +71,7 @@ lateinit var rangeSlider: RangeSlider
                 bmp!!.compress(Bitmap.CompressFormat.PNG, 100, imageOutStream)
                 //close the output stream after use
                 imageOutStream!!.close()
+                toast("Saved",this)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
